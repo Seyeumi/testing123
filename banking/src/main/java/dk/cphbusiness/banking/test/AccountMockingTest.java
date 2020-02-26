@@ -1,4 +1,4 @@
-package dk.cphbusiness.banking;
+package dk.cphbusiness.banking.test;
 
 import org.jmock.Expectations;
 import org.jmock.integration.junit4.JUnitRuleMockery;
@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class AccountMockingTest {
+public class  AccountMockingTest {
   @Rule
   public JUnitRuleMockery context = new JUnitRuleMockery();
 

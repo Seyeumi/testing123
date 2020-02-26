@@ -1,5 +1,7 @@
-package dk.cphbusiness.banking;
+package dk.cphbusiness.banking.test;
 
+import dk.cphbusiness.banking.files.Bank;
+import dk.cphbusiness.banking.files.Customer;
 import org.junit.Test;
 
 import static org.junit.Assert.assertNotNull;
@@ -10,14 +12,5 @@ public class BankTest {
     public void testCreateBank() throws Exception {
         Bank bank = new BankDummy("17288888", "Glorious bank");
         assertNotNull(bank);
-    }
-
-    @Test
-    public void testBankTransfer() throws Exception {
-        Bank bank = new BankDummy("17288888", "Glorious bank");
-        Customer cust = new CustomerDummy("123", "Kat", bank);
-
-
-
     }
 }
