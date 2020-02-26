@@ -3,22 +3,22 @@ package dk.cphbusiness.banking.test;
 import dk.cphbusiness.banking.files.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AccountDummy implements Account {
 
     private Bank bank;
     private Customer customer;
-    private int number;
+    private String number;
     private long balance = 0;
-    private List<Movement> withdrawals;
-    private List<Movement> deposits;
+    private List<Movement> withdrawals = new ArrayList<>();
+    private List<Movement> deposits = new ArrayList<>();
 
-    public AccountDummy(Bank bank, Customer customer) {
+    public AccountDummy(Bank bank, Customer customer, String number) {
         this.bank = bank;
         this.customer = customer;
-        this.number = Utils.accountAmount;
-        Utils.accountAmount++;
+        this.number = number;
     }
 
     @Override
@@ -30,12 +30,8 @@ public class AccountDummy implements Account {
         return customer;
     }
     @Override
-    public int getNumber() {
+    public String getNumber() {
         return number;
-    }
-    @Override
-    public long getBalance() {
-        return balance;
     }
     @Override
     public List<Movement> getWithdrawals() {
@@ -51,15 +47,20 @@ public class AccountDummy implements Account {
         this.balance = amount;
     }
 
+    @Override
+    public long getBalance() {
+        return balance;
+    }
+
     public void transfer(long amount, Account target) {
-        this.balance -= amount;
+        balance = balance - amount;
         target.setBalance(target.getBalance() + amount);
         Movement movement = new MovementDummy(LocalDateTime.now(), amount);
         withdrawals.add(movement);
         target.getDeposits().add(movement);
     }
 
-    public void transfer(long amount, int targetNumber) {
+    public void transfer(long amount, String targetNumber) {
         Account target = bank.getAccount(targetNumber);
         transfer(amount, target);
     }

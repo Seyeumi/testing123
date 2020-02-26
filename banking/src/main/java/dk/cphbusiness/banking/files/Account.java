@@ -8,7 +8,7 @@ public interface Account {
 
     Customer getCustomer();
 
-    int getNumber();
+    String getNumber();
 
     long getBalance();
 
@@ -20,5 +20,5 @@ public interface Account {
 
     void transfer(long amount, Account target);
 
-    void transfer(long amount, int targetNumber);
+    void transfer(long amount, String targetNumber);
 }

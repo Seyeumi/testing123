@@ -12,7 +12,7 @@ public class BankDummy implements Bank {
   private String name;
 
   Map<String, Customer> customers = new HashMap<>();
-  Map<Integer, Account> accounts = new HashMap<>();
+  Map<String, Account> accounts = new HashMap<>();
 
   public BankDummy(String cvr, String name) {
     this.cvr = cvr;
@@ -28,12 +28,12 @@ public class BankDummy implements Bank {
   }
 
   @Override
-  public Account getAccount(int number) {
+  public Account getAccount(String number) {
     return accounts.get(number);
   }
 
   @Override
-  public Map<Integer, Account> getAccounts(Customer customer) {
+  public Map<String, Account> getAccounts(Customer customer) {
     return accounts;
   }
 

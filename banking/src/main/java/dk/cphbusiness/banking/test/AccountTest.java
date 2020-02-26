@@ -12,7 +12,7 @@ public class AccountTest {
   public void testCreateAccount() throws Exception {
     Bank bank = new BankDummy("17299999","Glorious bank");
     Customer customer = new CustomerDummy("0102030405", "Glorious Customer", bank);
-    Account account = new AccountDummy(bank, customer);
+    Account account = new AccountDummy(bank, customer, "12345");
     assertNotNull(account);
     }
 
@@ -20,7 +20,7 @@ public class AccountTest {
   public void testCreateAccountWithBank() {
     Bank bank = new BankDummy("17299999","Glorious bank");
     Customer customer = new CustomerDummy("0102030405", "Glorious Customer", bank);
-    Account account = new AccountDummy(bank, customer);
+    Account account = new AccountDummy(bank, customer, "12345");
     assertEquals(bank, account.getBank());
     assertNotNull(account.getBank());
     }
@@ -29,8 +29,8 @@ public class AccountTest {
   public void testCreateAccountWithNumber() {
     Bank bank = new BankDummy("17299999","Glorious bank");
     Customer customer = new CustomerDummy("0102030405", "Glorious Customer", bank);
-    int number = 0;
-    Account account = new AccountDummy(bank, customer);
+    String number = "12345";
+    Account account = new AccountDummy(bank, customer, "12345");
     assertEquals(number, account.getNumber());
     }
 
@@ -38,7 +38,7 @@ public class AccountTest {
   public void testCreateAccountWithZeroBalance() {
     Bank bank = new BankDummy("17299999","Glorious bank");
     Customer customer = new CustomerDummy("0102030405", "Glorious Customer", bank);
-    Account account = new AccountDummy(bank, customer);
+    Account account = new AccountDummy(bank, customer, "12345");
     assertEquals(0L, account.getBalance());
     }
 
@@ -46,8 +46,8 @@ public class AccountTest {
   public void testTransferPositiveAmount() {
     Bank bank = new BankDummy("17299999","Glorious bank");
     Customer customer = new CustomerDummy("0102030405", "Glorious Customer", bank);
-    Account source = new AccountDummy(bank, customer);
-    Account target = new AccountDummy(bank, customer);
+    Account source = new AccountDummy(bank, customer, "12345");
+    Account target = new AccountDummy(bank, customer, "12346");
     source.transfer(10000, target);
     assertEquals(-10000, source.getBalance());
     assertEquals(10000, target.getBalance());
@@ -57,11 +57,11 @@ public class AccountTest {
   public void testTransferPositiveAmountUsingNumber() {
     Bank bank = new BankDummy("17299999","Glorious bank");
     Customer customer = new CustomerDummy("0102030405", "Glorious Customer", bank);
-    Account target = new AccountDummy(bank, customer);
-    Account source = new AccountDummy(bank, customer);
+    Account source = new AccountDummy(bank, customer, "12345");
+    Account target = new AccountDummy(bank, customer, "12346");
     bank.addAccount(source);
     bank.addAccount(target);
-    source.transfer(10000, 1);
+    source.transfer(10000, "12346");
     assertEquals(-10000, source.getBalance());
     assertEquals(10000, target.getBalance());
     }
