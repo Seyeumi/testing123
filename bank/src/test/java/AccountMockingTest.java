@@ -1,27 +1,28 @@
-import dk.cphbusiness.banking.files.Account;
-import dk.cphbusiness.banking.files.Bank;
-import dk.cphbusiness.banking.files.Customer;
-import org.junit.Rule;
+import models.Account;
+import models.Bank;
+import models.Customer;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.*;
 
+@RunWith(MockitoJUnitRunner.class)
 public class  AccountMockingTest {
-  @Rule
-  public JUnitRuleMockery context = new JUnitRuleMockery();
+
+  @Mock
+  Customer customer;
+
+  @Mock
+  Bank bank;
 
   @Test
   public void testAccountTransfer() {
-    final Customer customer = context.mock(Customer.class);
-    final Bank bank = context.mock(Bank.class);
     final String targetNumber = "TGT54321";
-    Account source = new Account(bank, customer, "SRC54321");
-    Account target = new Account(bank, customer, targetNumber);
-    context.checking(new Expectations(){{
-      oneOf(bank).getAccount(targetNumber);
-      will(returnValue(target));
-      //oneOf(bank).getName();
-      }});
+    Account source = new AccountDummy(bank, customer, "SRC54321");
+    Account target = new AccountDummy(bank, customer, targetNumber);
 
     source.transfer(10000, "TGT54321");
     assertEquals(-10000, source.getBalance());
