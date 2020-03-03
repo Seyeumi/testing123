@@ -26,9 +26,7 @@ public class BankDummy implements Bank {
   }
 
   @Override
-  public Account getAccount(String number) {
-    return accounts.get(number);
-  }
+  public Account getAccount(String number) { return accounts.get(number); }
 
   @Override
   public Map<String, Account> getAccounts(Customer customer) {

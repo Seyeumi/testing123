@@ -9,26 +9,40 @@ import org.mockito.junit.MockitoJUnitRunner;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
+//@RunWith(MockitoJUnitRunner.class)
 public class  AccountMockingTest {
 
   @Mock
   Customer customer;
 
   @Mock
-  Bank bank;
+  Bank mockedBank = mock(Bank.class);
+
 
   @Test
-  public void testAccountTransfer() {
+  public void testAccountTransferWithAccount() {
     final String targetNumber = "TGT54321";
-    Account source = new AccountDummy(bank, customer, "SRC54321");
-    Account target = new AccountDummy(bank, customer, targetNumber);
+    Account source = new AccountDummy(mockedBank, customer, "SRC54321");
+    Account target = new AccountDummy(mockedBank, customer, targetNumber);
+
+    source.transfer(10000, target);
+    assertEquals(-10000, source.getBalance());
+    assertEquals(10000, target.getBalance());
+
+    //context.assertIsSatisfied();
+    }
+
+  @Test
+  public void testAccountTransferWithNumber() {
+    final String targetNumber = "TGT54321";
+    Account source = new AccountDummy(mockedBank, customer, "SRC54321");
+    Account target = new AccountDummy(mockedBank, customer, targetNumber);
 
     source.transfer(10000, "TGT54321");
     assertEquals(-10000, source.getBalance());
     assertEquals(10000, target.getBalance());
 
     //context.assertIsSatisfied();
-    }
+  }
 
   }
