@@ -54,19 +54,15 @@ public class AccountDummy implements Account {
     }
 
     public void transfer(long amount, Account target) {
-        if(balance > amount) {
             balance = balance - amount;
             target.setBalance(target.getBalance() + amount);
             Movement movement = new MovementDummy(LocalDateTime.now(), amount);
             withdrawals.add(movement);
             target.getDeposits().add(movement);
-        }
     }
 
     public void transfer(long amount, String targetNumber) {
-        if(balance > amount){
             Account target = bank.getAccount(targetNumber);
             transfer(amount, target);
-        }
     }
 }
