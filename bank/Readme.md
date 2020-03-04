@@ -1,5 +1,5 @@
 # 1 - Bank Assignment, mocking, TDD
-## [Back to main hub](github.com/niichtsshaiaz/testing123)
+## [Back to main hub](www.github.com/niichtsshaiaz/testing123)
 
 This assignment is about mocking and using test driven development
 - Development language: Java
