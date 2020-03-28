@@ -10,4 +10,6 @@ public class BankTest {
         Bank bank = new BankDummy("17288888", "Glorious bank");
         assertNotNull(bank);
     }
+
+
 }
